@@ -2,8 +2,9 @@ import csv
 
 
 class CDLLNode:
-    csv_tweet = csv.reader(csv_file, delimiter='|')
+    # csv_tweet = csv.reader(csv_file, delimiter='|')
     def __init__(self, time="", tweet="", next_node=None, prev_node=None):
+        csv_tweet = csv.reader(csv_file, delimiter='|')
         self.time: str = time
         self.tweet: str = tweet
         self.next_node: CDLLNode = next_node
@@ -83,36 +84,16 @@ class CDLL:
     def skip(self,n:int):    
           pass
      # Search tweet 
-    def search_tweet(self, d):
-    		this_node = self.root
-		while True:
-			if this_node.get_tweet() == d:
-				return d
-			elif this_node.get_next() == self.root:
-				return False
-			this_node = this_node.get_next()
-     
-    def insert_at_end(self, new_node):
-        if self.head is None:
-            self.head = new_node
-            new_node.next = new_node
-            new_node.prev = new_node
-        else:
-            self.insert(self.head.prev, new_node)
- 
-    def insert_at_beg(self, new_node):
-        self.insert_at_end(new_node)
-        self.head = new_node
- 
-    def remove(self, node):
-        if self.head.next == self.head:
-            self.head = None
-        else:
-            node.prev.next = node.next
-            node.next.prev = node.prev
-            if self.head == node:
-                self.head = node.next
- 
+    def search_tweet (self, d):
+        this_node = self.root
+        while this_node is not None:
+            if this_node.get_data() == d:
+                return d
+            elif this_node.get_next() == self.root:
+                return false
+            else:
+                this_node = this_node.get_next()
+           
     def print_current(self):
         if self.head is None:
             return
@@ -135,19 +116,18 @@ class CDLL:
  
 a_cdllist = CDLL()
  
-print('Menu')
-print(' <time>  <index>')
-print('insert <time> before <index>')
-print('insert <time> at beg')
-print('insert <time> at end')
-print('remove <index>') 
-print('quit')
+# print('Menu')
+# print(' <time>  <index>')
+# print('insert <time> before <index>')
+# print('insert <time> at beg')
+# print('insert <time> at end')
+# print('remove <index>') 
+# print('quit')
  
 while True:
-    print('The list: ', end = '')
     a_cdllist.print_current()
     print()
-    do = input('What would you like to do? ').split()
+    do = input().split()
  
     operation = do[0].strip().lower()
  
